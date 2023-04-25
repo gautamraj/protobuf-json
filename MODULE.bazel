@@ -1,0 +1,51 @@
+bazel_dep(name = "rules_jvm_external", version = "5.2")
+
+# To update maven dependencies, update the lines below and then run:
+# bazel run @unpinned_maven//:pin
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        # Command line arg parsing
+        "com.beust:jcommander:jar:1.82",
+        "com.fasterxml.jackson.core:jackson-databind:jar:2.14.2",
+        # Cache
+        "com.github.ben-manes.caffeine:caffeine:jar:3.1.6",
+        # Java file formatter
+        "com.google.googlejavaformat:google-java-format:1.16.0",
+        "com.google.guava:guava:31.1-jre",
+        "com.google.protobuf:protobuf-java:jar:3.22.3",
+        "com.google.protobuf:protobuf-java-util:jar:3.22.3",
+        "javax.inject:javax.inject:1",
+        "junit:junit:4.13",
+        "org.apache.commons:commons-lang3:jar:3.12.0",
+        # Logger dependencies
+        "org.apache.logging.log4j:log4j-core:jar:2.20.0",
+        "org.apache.logging.log4j:log4j-slf4j-impl:jar:2.20.0",
+        # Fluent test assertions
+        "org.assertj:assertj-core:jar:3.24.2",
+        # JMH microbenchmarking
+        "org.openjdk.jmh:jmh-core:jar:1.36",
+        "org.openjdk.jmh:jmh-generator-annprocess:jar:1.36",
+        # Hubspot datatype (for benchmarking comparison)
+        "com.hubspot.jackson:jackson-datatype-protobuf:jar:0.9.13",
+    ],
+    lock_file = "//:rules_jvm_external~5.2~maven~maven_install.json",
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
+)
+use_repo(maven, "maven", "unpinned_maven")
+
+# Protobuf
+bazel_dep(
+    name = "rules_proto",
+    version = "5.3.0-21.7",
+)
+
+# Buildifier
+bazel_dep(
+    name = "buildifier_prebuilt",
+    version = "6.1.0",
+    dev_dependency = True,
+)

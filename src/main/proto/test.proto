@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "proto.protojson";
+
+// A test proto with all types of fields.
+message TestMessagePb {
+  enum TestEnumPb {
+    TEST_ENUM_PB_0 = 0;
+    TEST_ENUM_PB_1 = 1;
+    TEST_ENUM_PB_2 = 2;
+  }
+  message TestInternalPb {
+    int32 int32_field = 1;
+    int64 int64_field = 2;
+    string string_field = 3;
+    bytes bytes_field = 4;
+    bool bool_field = 5;
+    float float_field = 6;
+    double double_field = 7;
+    TestEnumPb enum_field = 8;
+    repeated string repeated_string_field = 9;
+  }
+  int32 int32_field = 1;
+  int64 int64_field = 2;
+  string string_field = 3;
+  bytes bytes_field = 4;
+  bool bool_field = 5;
+  float float_field = 6;
+  double double_field = 7;
+  TestEnumPb enum_field = 8;
+  repeated string repeated_string_field = 9;
+}
+
